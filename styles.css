@@ -34,12 +34,15 @@ Landing page Styles
 */
 
 .background {
-  background-image: url(images/bg4.jfif);
+  background-image: url(images/bg4.jpg);
   width: 100vw;
   height: 100vh;
   background-color: #252525;
   background-size: cover;
   background-position: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .container {
   background: linear-gradient(
@@ -53,6 +56,7 @@ Landing page Styles
   padding: 50px 45px;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
 }
 .ml-head {
   font-family: "Manjari", sans-serif;
@@ -146,6 +150,50 @@ Landing page Styles
     margin-left: 3px;
   }
 }
+.floatNotification {
+  background: #ffffff;
+  width: 20%;
+  height: 47%;
+  top: 40px;
+  right: 40px;
+  position: absolute;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 26px rgba(89, 84, 84, 0.57);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateY(-500px);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.flt-head {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  background: #f2f5fa;
+}
+.flt-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  font-weight: 400;
+  font-size: 12px;
+}
+.close {
+  font-size: 10px;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.close:hover {
+  color: #e8e8e8;
+  background-color: #f43f5e;
+  cursor: pointer;
+}
+
 /*
 /////////////////////
 Game
@@ -237,6 +285,7 @@ Game
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
 }
 .q-state-top {
   display: flex;
