@@ -48,12 +48,16 @@ const life = document.querySelector(".life");
 const timertext = document.querySelector(".timertext");
 const topScore = document.querySelector(".topscore");
 const resultSec = document.querySelector(".q-state");
+const resultSectext = document.querySelector(".quest-status");
+const resultSecIcnsvg = document.querySelector(".quest-svg");
+const nextquestionbtn = document.querySelector(".next-q");
 //Declaration of variables :Quiz variables
 let QuizScore = 0;
 let Quizlife = 5;
 let QuizTimer = 8;
 let timer;
 let Qnumber = 0;
+let CorrectAnswerOption = 0; //Index of the Option holding Correct Answer
 /////////////Set values In UI Elements
 const setUI = function () {
   score.innerHTML = QuizScore;
@@ -65,7 +69,6 @@ const setUI = function () {
 ///////////Set Question
 function setQuestion() {
   Qnumber = Math.floor(Math.random() * (data.length - 1) + 1);
-  console.log(Qnumber);
   optionA.innerHTML = data[Qnumber].optionA;
   optionB.innerHTML = data[Qnumber].optionB;
   optionC.innerHTML = data[Qnumber].optionC;
@@ -77,16 +80,22 @@ function EnableOptions() {
   optionA.disabled = false;
   optionB.disabled = false;
   optionC.disabled = false;
+  options.forEach((option) => {
+    option.style.color = "#7D7C7C";
+    option.style.backgroundColor = "#F2F5FA";
+  });
+  nextquestionbtn.disabled = true;
 }
 function DisableOptions() {
   optionA.disabled = true;
   optionB.disabled = true;
   optionC.disabled = true;
+  nextquestionbtn.disabled = false;
 }
-//Timer
+///Timer
 function timerStart() {
   timer = setInterval(() => {
-    QuizTimer > 0 ? QuizTimer-- : clearTimeout(timer);
+    QuizTimer > 0 ? QuizTimer-- : timeOut();
     setUI();
   }, 1000);
 }
@@ -107,16 +116,79 @@ initialState();
 
 //////////////////////////////////////////////////
 /////////////////////////////////////////////////
-/////Option Clicks
+///////////////////////////////////////Option Clicks
+//1.Any Option Clicked
 function optionClicked() {
   clearTimeout(timer);
   DisableOptions();
-
   resultSec.style.opacity = "1";
   resultSec.style.transform = "translateY(0px)";
 }
-optionA.addEventListener("click", () => {
+//2.Wrong Answer Clicked
+function wrongAnswer(option) {
+  Quizlife--;
+  option.style.backgroundColor = "#F43F5E";
+  option.style.color = "#FFFFFF";
+  setUI();
+  resultSectext.innerHTML = `Wrong Answer !`;
+  resultSecIcnsvg.src = "images/times-circle-solid.svg";
+}
+//3.Time Out
+function timeOut() {
   optionClicked();
-  if ((data[Qnumber].Answer = "A")) {
+  Quizlife--;
+  setUI();
+  resultSectext.innerHTML = `Time Over !`;
+  resultSecIcnsvg.src = "images/stopwatch-solid.svg";
+}
+//4.Correct Answer Clicked
+function correctAnswer(option) {
+  QuizScore++;
+  option.style.backgroundColor = "#2FDF56";
+  option.style.color = "#FFFFFF";
+  setUI();
+  resultSectext.innerHTML = `Correct Answer !`;
+  resultSecIcnsvg.src = "images/correct.svg";
+}
+//5.Function for Setting Correct Answer
+//when wrong Answer is clicked
+function setCorrectAnswer(answerOption) {
+  switch (answerOption) {
+    case "A":
+      CorrectAnswerOption = 0;
+      break;
+    case "B":
+      CorrectAnswerOption = 1;
+      break;
+    case "C":
+      CorrectAnswerOption = 2;
+      break;
   }
+  options[CorrectAnswerOption].style.backgroundColor = "#2FDF56";
+  options[CorrectAnswerOption].style.color = "#FFFFFF";
+}
+//6 Any Option Clicked
+optionA.addEventListener("click", (event) => {
+  optionClicked();
+  if (data[Qnumber].Answer == "A") {
+    correctAnswer(event.target);
+  } else {
+    wrongAnswer(event.target);
+    setCorrectAnswer(data[Qnumber].Answer);
+  }
+});
+//7 Next Question
+function nextQuestion() {
+  if (Quizlife > 0) {
+    QuizTimer = 8;
+    setUI();
+    setQuestion();
+    timerStart();
+    EnableOptions();
+    resultSec.style.opacity = "0";
+    resultSec.style.transform = "translateY(50px)";
+  }
+}
+nextquestionbtn.addEventListener("click", () => {
+  nextQuestion();
 });

@@ -388,3 +388,17 @@ Game
 .option-holder-main {
   width: 100%;
 }
+.quest-svg {
+  animation: IcnAnim 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+@keyframes IcnAnim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

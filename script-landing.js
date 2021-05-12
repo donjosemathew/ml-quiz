@@ -17,7 +17,7 @@ rulesCloseBtn.addEventListener("click", () => {
 });
 /////////3.Quiz start Button Click
 startQuiz.addEventListener("click", () => {
-  window.location.href = "/game.html";
+  window.location.href = "./game.html";
 });
 /////////Background Image change
 let bgimageIndex = 0;
