@@ -1,4 +1,4 @@
-const data = [
+const dataEasy = [
   {
     question: "കേരള സംസ്ഥാനം നിലവില്‍ വന്നതെന്ന്",
     optionA: "1950 നവംബര്‍ 1 ",
@@ -36,6 +36,80 @@ const data = [
   },
 ];
 
+const dataMedium = [
+  {
+    question: "കേരള സംസ്ഥാനം നിലവില്‍ വന്നതെന്ന്",
+    optionA: "1950 നവംബര്‍ 1 ",
+    optionB: "1950 ജനുവരി 26",
+    optionC: "1956 നവംബര്‍ 1",
+    Answer: "C",
+  },
+  {
+    question: "കേരളത്തിന്‍റെ തെക്കേ അറ്റത്തെ അസംബ്ലി മണ്ഡലം ",
+    optionA: "പാറശ്ശാല ",
+    optionB: "മഞ്ചേശ്വരം ",
+    optionC: "കളിയിക്കവിള ",
+    Answer: "A",
+  },
+  {
+    question: "തെക്കന്‍ കേരളത്തിന്‍റെ മാഞ്ചസ്റ്റെര്‍ എന്നറിയപ്പെടുന്ന നഗരം ",
+    optionA: "ബാലരാമപുരം ",
+    optionB: "തലപ്പാടി ",
+    optionC: "കായംകുളം ",
+    Answer: "A",
+  },
+  {
+    question: "ശ്രീനാരായണ ഗുരുവിന്‍റെ സമാധി സ്ഥലം സ്ഥിതി ചെയ്യുന്നത് ",
+    optionA: "ചെമ്പഴന്തി",
+    optionB: "കിളിമാനൂര്‍ ",
+    optionC: "ശിവഗിരി ",
+    Answer: "C",
+  },
+  {
+    question: "നോര്‍വെയുടെ സഹകരണത്തോടെയുള്ള  ഫിഷറീസ് കമ്മ്യൂണിറ്റി പ്രോജക്റ്റ്",
+    optionA: "വിഴിഞ്ഞം ",
+    optionB: "നീണ്ടകര ",
+    optionC: "കൊച്ചി ",
+    Answer: "B",
+  },
+];
+const dataHard = [
+  {
+    question: "കേരള സംസ്ഥാനം നിലവില്‍ വന്നതെന്ന്",
+    optionA: "1950 നവംബര്‍ 1 ",
+    optionB: "1950 ജനുവരി 26",
+    optionC: "1956 നവംബര്‍ 1",
+    Answer: "C",
+  },
+  {
+    question: "കേരളത്തിന്‍റെ തെക്കേ അറ്റത്തെ അസംബ്ലി മണ്ഡലം ",
+    optionA: "പാറശ്ശാല ",
+    optionB: "മഞ്ചേശ്വരം ",
+    optionC: "കളിയിക്കവിള ",
+    Answer: "A",
+  },
+  {
+    question: "തെക്കന്‍ കേരളത്തിന്‍റെ മാഞ്ചസ്റ്റെര്‍ എന്നറിയപ്പെടുന്ന നഗരം ",
+    optionA: "ബാലരാമപുരം ",
+    optionB: "തലപ്പാടി ",
+    optionC: "കായംകുളം ",
+    Answer: "A",
+  },
+  {
+    question: "ശ്രീനാരായണ ഗുരുവിന്‍റെ സമാധി സ്ഥലം സ്ഥിതി ചെയ്യുന്നത് ",
+    optionA: "ചെമ്പഴന്തി",
+    optionB: "കിളിമാനൂര്‍ ",
+    optionC: "ശിവഗിരി ",
+    Answer: "C",
+  },
+  {
+    question: "നോര്‍വെയുടെ സഹകരണത്തോടെയുള്ള  ഫിഷറീസ് കമ്മ്യൂണിറ്റി പ്രോജക്റ്റ്",
+    optionA: "വിഴിഞ്ഞം ",
+    optionB: "നീണ്ടകര ",
+    optionC: "കൊച്ചി ",
+    Answer: "B",
+  },
+];
 //////Declaration of variables
 //Declaration of variables :UI Elements
 const question = document.querySelector(".question");
@@ -65,6 +139,7 @@ let QuizTimer = 9;
 let timer;
 let Qnumber = 0;
 let CorrectAnswerOption = 0; //Index of the Option holding Correct Answer
+let data = dataHard; //Question level
 /////////////Set values In UI Elements
 const setUI = function () {
   score.innerHTML = QuizScore;
@@ -227,15 +302,17 @@ gamerestart.addEventListener("click", () => {
   initialState();
 });
 ////////////Game Level///////////
-levelBtn.addEventListener("mouseover", () => {
-  leveldropdown.style.opacity = "1";
+levelBtn.addEventListener("click", () => {
+  !parseInt(leveldropdown.style.opacity)
+    ? (leveldropdown.style.opacity = "1")
+    : (leveldropdown.style.opacity = "0");
 });
-leveldropdown.addEventListener("mouseout", () => {
-  //leveldropdown.style.opacity = "0";
-});
+
 dropdownitems.forEach((item, index) => {
   item.addEventListener("click", () => {
     leveldropdown.style.opacity = "0";
     levelIcn.src = `images/medal/${index + 1}.svg`;
+    data = [dataEasy, dataMedium, dataHard][index];
   });
 });
+console.log(data);
