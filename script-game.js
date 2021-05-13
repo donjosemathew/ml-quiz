@@ -51,10 +51,17 @@ const resultSec = document.querySelector(".q-state");
 const resultSectext = document.querySelector(".quest-status");
 const resultSecIcnsvg = document.querySelector(".quest-svg");
 const nextquestionbtn = document.querySelector(".next-q");
+const notification = document.querySelector(".notification");
+const gamerestart = document.querySelector(".icon-redo");
+const levelBtn = document.querySelector(".level");
+const levelIcn = document.querySelector(".level-icn");
+const leveldropdown = document.querySelector(".dropdown");
+const dropdownitems = document.querySelectorAll(".dropdown-item");
+const highscorestorage = window.localStorage;
 //Declaration of variables :Quiz variables
 let QuizScore = 0;
 let Quizlife = 5;
-let QuizTimer = 8;
+let QuizTimer = 9;
 let timer;
 let Qnumber = 0;
 let CorrectAnswerOption = 0; //Index of the Option holding Correct Answer
@@ -63,6 +70,7 @@ const setUI = function () {
   score.innerHTML = QuizScore;
   life.innerHTML = Quizlife;
   timertext.innerHTML = "0" + QuizTimer;
+  topScore.innerHTML = localStorage.getItem("highscore");
 };
 
 ///////////
@@ -77,20 +85,18 @@ function setQuestion() {
 ////////
 //Enable/Disable Options
 function EnableOptions() {
-  optionA.disabled = false;
-  optionB.disabled = false;
-  optionC.disabled = false;
   options.forEach((option) => {
     option.style.color = "#7D7C7C";
     option.style.backgroundColor = "#F2F5FA";
+    option.disabled = false;
   });
   nextquestionbtn.disabled = true;
 }
 function DisableOptions() {
-  optionA.disabled = true;
-  optionB.disabled = true;
-  optionC.disabled = true;
   nextquestionbtn.disabled = false;
+  options.forEach((option) => {
+    option.disabled = true;
+  });
 }
 ///Timer
 function timerStart() {
@@ -104,9 +110,11 @@ function timerStart() {
 const initialState = function () {
   QuizScore = 0;
   Quizlife = 5;
-  QuizTimer = 8;
+  QuizTimer = 9;
   resultSec.style.opacity = "0";
   resultSec.style.transform = "translateY(50px)";
+  notification.style.transform = "translateX(-400px)";
+  notification.style.opacity = "0";
   setUI();
   timerStart();
   setQuestion();
@@ -114,8 +122,8 @@ const initialState = function () {
 };
 initialState();
 
+///////////////////////////////////////////////////
 //////////////////////////////////////////////////
-/////////////////////////////////////////////////
 ///////////////////////////////////////Option Clicks
 //1.Any Option Clicked
 function optionClicked() {
@@ -132,6 +140,9 @@ function wrongAnswer(option) {
   setUI();
   resultSectext.innerHTML = `Wrong Answer !`;
   resultSecIcnsvg.src = "images/times-circle-solid.svg";
+  if (Quizlife <= 0) {
+    gameOver();
+  }
 }
 //3.Time Out
 function timeOut() {
@@ -140,6 +151,10 @@ function timeOut() {
   setUI();
   resultSectext.innerHTML = `Time Over !`;
   resultSecIcnsvg.src = "images/stopwatch-solid.svg";
+  setCorrectAnswer(data[Qnumber].Answer);
+  if (Quizlife <= 0) {
+    gameOver();
+  }
 }
 //4.Correct Answer Clicked
 function correctAnswer(option) {
@@ -151,7 +166,7 @@ function correctAnswer(option) {
   resultSecIcnsvg.src = "images/correct.svg";
 }
 //5.Function for Setting Correct Answer
-//when wrong Answer is clicked
+//when wrong Answer is clicked/TimeOut
 function setCorrectAnswer(answerOption) {
   switch (answerOption) {
     case "A":
@@ -167,17 +182,22 @@ function setCorrectAnswer(answerOption) {
   options[CorrectAnswerOption].style.backgroundColor = "#2FDF56";
   options[CorrectAnswerOption].style.color = "#FFFFFF";
 }
-//6 Any Option Clicked
-optionA.addEventListener("click", (event) => {
-  optionClicked();
-  if (data[Qnumber].Answer == "A") {
-    correctAnswer(event.target);
-  } else {
-    wrongAnswer(event.target);
-    setCorrectAnswer(data[Qnumber].Answer);
-  }
+//6. Any Option Clicked
+
+options.forEach((option, index) => {
+  option.addEventListener("click", (event) => {
+    optionClicked();
+    if (data[Qnumber].Answer == ["A", "B", "C"][index]) {
+      correctAnswer(event.target);
+    } else {
+      wrongAnswer(event.target);
+      setCorrectAnswer(data[Qnumber].Answer);
+    }
+  });
 });
-//7 Next Question
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
+////////////Next Question
 function nextQuestion() {
   if (Quizlife > 0) {
     QuizTimer = 8;
@@ -187,8 +207,35 @@ function nextQuestion() {
     EnableOptions();
     resultSec.style.opacity = "0";
     resultSec.style.transform = "translateY(50px)";
+  } else {
+    gameOver();
   }
 }
 nextquestionbtn.addEventListener("click", () => {
   nextQuestion();
+});
+////////////Game Over
+function gameOver() {
+  notification.style.transform = "translateX(0)";
+  notification.style.opacity = "1";
+  if (localStorage.getItem("highscore") < QuizScore) {
+    highscorestorage.setItem("highscore", QuizScore);
+    setUI();
+  }
+}
+gamerestart.addEventListener("click", () => {
+  initialState();
+});
+////////////Game Level///////////
+levelBtn.addEventListener("mouseover", () => {
+  leveldropdown.style.opacity = "1";
+});
+leveldropdown.addEventListener("mouseout", () => {
+  //leveldropdown.style.opacity = "0";
+});
+dropdownitems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    leveldropdown.style.opacity = "0";
+    levelIcn.src = `images/medal/${index + 1}.svg`;
+  });
 });

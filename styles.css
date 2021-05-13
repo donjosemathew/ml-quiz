@@ -205,6 +205,7 @@ Game
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr 0.424fr;
+  position: relative;
 }
 .sidebar {
   background: #ffffff;
@@ -214,6 +215,7 @@ Game
   justify-content: flex-end;
   padding: 0px 25px 40px 25px;
   flex-direction: column;
+  position: relative;
 }
 .sidebar-holder {
   width: 100%;
@@ -273,6 +275,7 @@ Game
   text-align: center;
   display: inline-block;
   line-height: 1;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .timer-light {
   font-weight: 500;
@@ -377,7 +380,7 @@ Game
   font-family: Manjari;
   font-size: 17px;
   height: 45px;
-  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 .option:hover {
   background: #f2f5fac2;
@@ -401,4 +404,77 @@ Game
   100% {
     transform: scale(1);
   }
+}
+.notification {
+  position: absolute;
+  bottom: 30px;
+  left: 20px;
+  color: #f43f5e;
+  font-size: 16px;
+  z-index: 100;
+  background: #ffffff;
+  box-shadow: 0px 4px 31px rgba(229, 238, 253, 0.986);
+  border-radius: 6px;
+  width: 250px;
+  font-weight: 500;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  transition: all 01s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.icon-redo {
+  height: 20px;
+  margin-right: 25px;
+  transition: all 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  transform: rotate(0deg);
+}
+.icon-redo:hover {
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.level {
+  position: absolute;
+  background-color: #f2f5fa;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.level-icn {
+  height: 30px;
+}
+.dropdown {
+  position: absolute;
+  top: calc(50px + 27px);
+  right: 35px;
+  background: #ffffff;
+  box-shadow: 0px 4px 31px rgba(229, 238, 253, 0.986);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px;
+  flex-direction: column;
+  padding: 4px 0;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.dropdown-item {
+  padding: 10px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  color: #a4a4a4;
+  font-size: 16px;
+}
+.dropdown-item:hover {
+  background: #f5f5f581;
+  cursor: pointer;
 }
