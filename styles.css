@@ -153,9 +153,9 @@ Landing page Styles
 .floatNotification {
   background: #ffffff;
   width: 20%;
-  height: 47%;
+
   top: 40px;
-  right: 40px;
+  right: 70px;
   position: absolute;
   border-radius: 8px;
   overflow: hidden;
@@ -172,7 +172,7 @@ Landing page Styles
   padding: 10px;
   text-align: center;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   background: #f2f5fa;
 }
 .flt-content {
@@ -182,7 +182,7 @@ Landing page Styles
   flex-direction: column;
   padding: 15px;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
 }
 .close {
   font-size: 10px;
@@ -419,6 +419,7 @@ Game
   font-weight: 500;
   padding: 20px 25px;
   display: flex;
+  opacity: 0;
   flex-direction: row;
   justify-content: space-around;
   transition: all 01s cubic-bezier(0.215, 0.61, 0.355, 1);
