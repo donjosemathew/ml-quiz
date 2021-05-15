@@ -9,3 +9,6 @@
 ♟ 5 Lives ,1 Mark reducted 💔 for Wrong answer or time out<br/>
 ♟ 3 Question Level - Easy,Medium,Hard 🥇🥈🥈<br/>
 ♟ Currently only 30 Questions added😜<br/>
+# Credits <br/>
+Images:https://unsplash.com/<br>
+Icons:https://www.flaticon.com/
