@@ -152,7 +152,6 @@ Landing page Styles
 }
 .floatNotification {
   background: #ffffff;
-  width: 20%;
 
   top: 40px;
   right: 70px;
@@ -166,6 +165,7 @@ Landing page Styles
   justify-content: space-between;
   transform: translateY(-500px);
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  width: fit-content;
 }
 .flt-head {
   width: 100%;
