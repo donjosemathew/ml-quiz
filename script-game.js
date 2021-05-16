@@ -369,7 +369,6 @@ function setCorrectAnswer(answerOption) {
   options[CorrectAnswerOption].style.color = "#FFFFFF";
 }
 //6.Option Clicked
-
 options.forEach((option, index) => {
   option.addEventListener("click", (event) => {
     optionClicked();
