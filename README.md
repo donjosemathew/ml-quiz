@@ -7,7 +7,7 @@
 
 # Rules<br/>
 
-♟ Each Correct answer carry 3/2/1 Mark respectively for Hard,Medium And Easy Question 🐱‍🏍🐱‍🏍
+♟ Each Correct answer carry 3/2/1 Mark respectively for Hard,Medium And Easy Question 🐱‍🏍🐱‍🏍<br/>
 ♟Available time for each Question⏳ 09seconds<br/>
 ♟ 5 Lives ,1 Mark reducted 💔 for Wrong answer or time out<br/>
 ♟ 3 Question Level - Easy,Medium,Hard 🥇🥈🥈<br/>
