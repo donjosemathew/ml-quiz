@@ -1,3 +1,5 @@
+////////////////////////////////
+////////////////Game Data
 const dataEasy = [
   {
     question: "ആരുടെ ചരമദിനമായാണ് വായനാദിനം ആചരിക്കുന്നത്",
@@ -216,6 +218,8 @@ const dataHard = [
     Answer: "B",
   },
 ];
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 //////Declaration of variables
 //Declaration of variables :UI Elements
 const question = document.querySelector(".question");
@@ -251,19 +255,19 @@ const setUI = function () {
   score.innerHTML = QuizScore;
   life.innerHTML = Quizlife;
   timertext.innerHTML = "0" + QuizTimer;
-  topScore.innerHTML = localStorage.getItem("highscore");
+  topScore.innerHTML = localStorage.getItem("highscore"); //Get highscore from Local Storage
 };
 
-///////////
+///////////////////////////
 ///////////Set Question
 function setQuestion() {
-  Qnumber = Math.floor(Math.random() * (data.length - 1) + 1);
+  Qnumber = Math.floor(Math.random() * (data.length - 1) + 1); //Selecting random Question
   optionA.innerHTML = data[Qnumber].optionA;
   optionB.innerHTML = data[Qnumber].optionB;
   optionC.innerHTML = data[Qnumber].optionC;
   question.innerHTML = data[Qnumber].question;
 }
-////////
+////////////////
 //Enable/Disable Options
 function EnableOptions() {
   options.forEach((option) => {
@@ -279,15 +283,15 @@ function DisableOptions() {
     option.disabled = true;
   });
 }
-///Timer
+///////////Timer
 function timerStart() {
   timer = setInterval(() => {
     QuizTimer > 0 ? QuizTimer-- : timeOut();
     setUI();
   }, 1000);
 }
-//////////
-/////Initial State
+//////////////////
+/////Game Initial State
 const initialState = function () {
   QuizScore = 0;
   Quizlife = 5;
@@ -305,8 +309,8 @@ initialState();
 
 ///////////////////////////////////////////////////
 //////////////////////////////////////////////////
-///////////////////////////////////////Option Clicks
-//1.Any Option Clicked
+/////Option Clicks
+//1.After Any Option Clicked
 function optionClicked() {
   clearTimeout(timer);
   DisableOptions();
@@ -363,7 +367,7 @@ function setCorrectAnswer(answerOption) {
   options[CorrectAnswerOption].style.backgroundColor = "#2FDF56";
   options[CorrectAnswerOption].style.color = "#FFFFFF";
 }
-//6. Any Option Clicked
+//6.Option Clicked
 
 options.forEach((option, index) => {
   option.addEventListener("click", (event) => {
@@ -407,6 +411,7 @@ function gameOver() {
 gamerestart.addEventListener("click", () => {
   initialState();
 });
+//////////////////////////////////////////////////
 ////////////Game Level///////////
 levelBtn.addEventListener("click", () => {
   !parseInt(leveldropdown.style.opacity)
