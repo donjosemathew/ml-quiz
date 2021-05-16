@@ -250,6 +250,7 @@ let timer;
 let Qnumber = 0;
 let CorrectAnswerOption = 0; //Index of the Option holding Correct Answer
 let data = dataHard; //Question level
+let scoreeachanswer = 3; //Question level
 /////////////Set values In UI Elements
 const setUI = function () {
   score.innerHTML = QuizScore;
@@ -343,7 +344,7 @@ function timeOut() {
 }
 //4.Correct Answer Clicked
 function correctAnswer(option) {
-  QuizScore++;
+  QuizScore = QuizScore + scoreeachanswer;
   option.style.backgroundColor = "#2FDF56";
   option.style.color = "#FFFFFF";
   setUI();
@@ -424,5 +425,6 @@ dropdownitems.forEach((item, index) => {
     leveldropdown.style.opacity = "0";
     levelIcn.src = `images/medal/${index + 1}.svg`;
     data = [dataEasy, dataMedium, dataHard][index];
+    scoreeachanswer = index + 1;
   });
 });
