@@ -10,6 +10,7 @@
 ♟ Each Correct answer carry 1 Mark and ⏳ 09seconds<br/>
 ♟ 5 Lives ,1 Mark reducted 💔 for Wrong answer or time out<br/>
 ♟ 3 Question Level - Easy,Medium,Hard 🥇🥈🥈<br/>
+♟ After Each Question Click "Next Question" Button next ▶<br/>
 ♟ Currently only 30 Questions added😜<br/>
 ♟ Same Question may be repeated due to the low number of Questions<br/><br/>
 
